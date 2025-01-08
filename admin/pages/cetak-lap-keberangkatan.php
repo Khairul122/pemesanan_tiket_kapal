@@ -1,193 +1,139 @@
-<?php 
-ob_start();
-$tgl = isset($_GET['tgl']) ? (int)$_GET['tgl'] : '';
-$bln = isset($_GET['bln']) ? (int)$_GET['bln'] : '';
-$thn = isset($_GET['thn']) ? (int)$_GET['thn'] : '';
-$nmbulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
-?>
-<!DOCTYPE html>
-<html lang="id">
+<?php ob_start(); ?>
+<html>
+<style type="text/css">
+	table {
+		border-collapse: collapse;
+		padding-left: 5px;
+	}
+
+	table,
+	th,
+	td {
+		border: 1px solid black;
+	}
+
+	th,
+	td {
+		padding: 8px;
+		text-align: left;
+	}
+
+	h3 {
+		margin-bottom: 1px;
+		margin-top: 1px;
+	}
+
+	p {
+		margin-bottom: 1px;
+		margin-top: 1px;
+	}
+
+	body {
+		font-size: 8px;
+	}
+</style>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Keberangkatan</title>
-    <style>
-        @page { size: landscape; }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            font-size: 9pt;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .header .report-title {
-            font-size: 16pt;
-            font-weight: bold;
-        }
-        .header .company-info {
-            text-align: right;
-            font-size: 9pt;
-            line-height: 1.5;
-        }
-        .periode {
-            text-align: center;
-            font-size: 12pt;
-            margin: 20px 0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            table-layout: fixed;
-        }
-        th, td {
-            border: 1px solid #000;
-            padding: 8px;
-            text-align: center;
-            word-wrap: break-word;
-        }
-        th {
-            background-color: #f0f0f0;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        .total-row {
-            font-weight: bold;
-            background-color: #f0f0f0;
-        }
-        .signature {
-            margin-top: 40px;
-            text-align: center;
-            width: 200px;
-            float: right;
-        }
-        .signature-line {
-            margin-top: 50px;
-            border-top: 1px solid #000;
-        }
-    </style>
+	<title>Cetak PDF</title>
 </head>
+
 <body>
-    <div class="header">
-        <div class="report-title">LAPORAN KEBERANGKATAN</div>
-        <div class="company-info">
-            PT. ANUGERA SEJAHTERA MAS<br>
-            Jl. Alamat lengkap<br>
-            Alamat-email@gmail.com / Hp: 0821233123123 / Pin: b3jk343
-        </div>
-    </div>
-    <hr style="border: 1px solid #000;">
+	<?php
 
-    <div class="periode">
-        Periode: 
-        <?php 
-        $periode = array();
-        if ($tgl) $periode[] = $tgl;
-        if ($bln) $periode[] = $nmbulan[$bln - 1];
-        if ($thn) $periode[] = $thn;
-        echo implode(' ', $periode);
-        ?>
-    </div>
+	$nmbulan = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
 
-    <table>
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Kode Tiket</th>
-                <th>Tanggal</th>
-                <th>Jam</th>
-                <th>Tujuan</th>
-                <th>Kapal</th>
-                <th>Nahkoda</th>
-                <th>Jumlah Penumpang</th>
-                <th>Surat Izin</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            include "../../config/koneksi.php";
+	$bln = isset($_GET['bln']) ? $_GET['bln'] : "";
+	$thn = isset($_GET['thn']) ? $_GET['thn'] : "";
+	$tgl = isset($_GET['tgl']) ? $_GET['tgl'] : "";
 
-            $where = array();
-            if ($tgl) $where[] = "DAY(berangkat.tanggal)='$tgl'";
-            if ($bln) $where[] = "MONTH(berangkat.tanggal)='$bln'";
-            if ($thn) $where[] = "YEAR(berangkat.tanggal)='$thn'";
+	$filter = "";
+	if ($tgl) {
+		$filter = "AND DATE(tanggal) = '$thn-$bln-$tgl'";
+	} elseif ($bln && $thn) {
+		$filter = "AND MONTH(tanggal) = '$bln' AND YEAR(tanggal) = '$thn'";
+	} elseif ($thn) {
+		$filter = "AND YEAR(tanggal) = '$thn'";
+	}
+	?>
+	<h3 style="text-align: center; font-size: 13px;">PT.ANUGERA SEJAHTERA MAS</h3>
+	<p style="text-align: center;">Jl. Alamat lengkap</p>
+	<p style="text-align: center;">Alamat-email@gmail.com / Hp:0821233123123 / Pin:b3jk343</p>
+	<hr>
+	<h3 style="text-align: center; font-size: 16px">LAPORAN KEBERANGKATAN</h3>
+	<p style="text-align: center; margin-bottom: 5px;"> Periode : <?php
+																	if ($tgl) {
+																		echo $tgl . " " . $nmbulan[(int)$bln - 1] . " " . $thn;
+																	} elseif ($bln && $thn) {
+																		echo $nmbulan[(int)$bln - 1] . " " . $thn;
+																	} elseif ($thn) {
+																		echo $thn;
+																	}
+																	?> </p>
+	<table border="0" width="100%">
+		<tr>
+			<th width='5'>NO</th>
+			<th width='40'>KODE TIKET</th>
+			<th width='40'>TANGGAL</th>
+			<th width='20'>JAM</th>
+			<th width='60'>TUJUAN</th>
+			<th width='60'>KAPAL</th>
+			<th width='60'>NAHKODA</th>
+			<th width='70'>JUMLAH PENUMPANG</th>
+			<th width='60'>SURAT IZIN</th>
+			<th width='30'>STATUS</th>
+		</tr>
+		<?php
+		// Load file koneksi.php
+		include "../../config/koneksi.php";
 
-            $whereClause = !empty($where) ? "AND " . implode(" AND ", $where) : "";
+		$sql = mysqli_query($koneksi, "SELECT tiket.id_nahkoda, tiket.id_kapal, tiket.id_tujuan, nahkoda.nama_nah, tujuan.nama_tujuan, kapal.nama_kapal, berangkat.* FROM tiket 
+    JOIN nahkoda ON nahkoda.kode_nah = tiket.id_nahkoda
+    JOIN tujuan ON tujuan.kode_tujuan = tiket.id_tujuan
+    JOIN kapal ON kapal.kode_kapal = tiket.id_kapal
+    JOIN berangkat ON tiket.kode_tiket = berangkat.id_tiket
+    WHERE 1=1 $filter");
 
-            $sql = mysqli_query($koneksi, "
-                SELECT 
-                    tiket.id_nahkoda,
-                    tiket.jam_berangkat,
-                    tiket.id_kapal,
-                    tiket.id_tujuan,
-                    nahkoda.nama_nah,
-                    tujuan.nama_tujuan,
-                    kapal.nama_kapal,
-                    berangkat.* 
-                FROM tiket
-                JOIN nahkoda ON nahkoda.kode_nah = tiket.id_nahkoda
-                JOIN tujuan ON tujuan.kode_tujuan = tiket.id_tujuan 
-                JOIN kapal ON kapal.kode_kapal = tiket.id_kapal 
-                JOIN berangkat ON tiket.kode_tiket = berangkat.id_tiket 
-                WHERE 1=1 $whereClause
-                ORDER BY berangkat.tanggal DESC
-            ");
+		$row = mysqli_num_rows($sql);
 
-            if (mysqli_num_rows($sql) > 0) {
-                $no = 0;
-                $total_penumpang = 0;
-                while ($data = mysqli_fetch_array($sql)) {
-                    $no++;
-                    $total_penumpang += $data['jml_penumpang'];
-                    echo "<tr>
-                        <td>{$no}</td>
-                        <td>" . htmlspecialchars($data['id_tiket']) . "</td>
-                        <td>" . date('d-m-Y', strtotime($data['tanggal'])) . "</td>
-                        <td>" . date('H:i', strtotime($data['jam_berangkat'])) . "</td>
-                        <td>" . htmlspecialchars($data['id_tujuan'] . '/' . $data['nama_tujuan']) . "</td>
-                        <td>" . htmlspecialchars($data['id_kapal'] . '/' . $data['nama_kapal']) . "</td>
-                        <td>" . htmlspecialchars($data['id_nahkoda'] . '/' . $data['nama_nah']) . "</td>
-                        <td>{$data['jml_penumpang']}</td>
-                        <td>" . htmlspecialchars($data['no_surat_izin']) . "</td>
-                        <td>" . ($data['status'] == 'P' ? 'Pergi' : 'Balik') . "</td>
-                    </tr>";
-                }
-                echo "<tr class='total-row'>
-                        <td colspan='7'>Total Penumpang</td>
-                        <td colspan='3'>{$total_penumpang}</td>
-                    </tr>";
-            } else {
-                echo "<tr><td colspan='10'>Data tidak tersedia</td></tr>";
-            }
-            ?>
-        </tbody>
-    </table>
+		if ($row > 0) {
+			$no = 0;
+			while ($data = mysqli_fetch_array($sql)) {
+				$no++;
+				$stt = ($data['status'] == "P") ? "Pergi" : "Balik";
 
-    <div class="signature">
-        Padang, <?php echo date('d') . ' ' . $nmbulan[(int)date('m') - 1] . ' ' . date('Y'); ?>
-        <div class="signature-line"></div>
-        <strong>Pimpinan</strong>
-    </div>
+				echo "<tr>";
+				echo "<td>" . $no . "</td>";
+				echo "<td>" . $data['id_tiket'] . "</td>";
+				echo "<td>" . date('d F Y', strtotime($data['tanggal'])) . "</td>";
+				echo "<td>" . date('H:i', strtotime($data['tanggal'])) . "</td>";
+				echo "<td>" . $data['nama_tujuan'] . "</td>";
+				echo "<td>" . $data['nama_kapal'] . "</td>";
+				echo "<td>" . $data['nama_nah'] . "</td>";
+				echo "<td>" . $data['jml_penumpang'] . "</td>";
+				echo "<td>" . $data['no_surat_izin'] . "</td>";
+				echo "<td>" . $stt . "</td>";
+				echo "</tr>";
+			}
+		} else {
+			echo "<tr><td colspan='10'>Data tidak ada</td></tr>";
+		}
+		?>
+	</table>
+	<br>
+	<p style="text-align: right; margin-top: 10px; margin-right: 9px;"> Padang, <?php echo date('d'); ?> <?php echo $nmbulan[(int)date('m') - 1]; ?> <?php echo date('Y'); ?> </p>
+	<br>
+	<br>
+	<br>
+	<p style="text-align: right; margin-top: 5px; margin-right: 9px;"><b>Pimpinan</b></p>
 </body>
+
 </html>
 <?php
-$html = ob_get_clean();
+$html = ob_get_contents();
+ob_end_clean();
 
-// Simpan file HTML ke dalam PDF di folder "output"
 require_once('html2pdf/html2pdf.class.php');
-$pdf = new HTML2PDF('L', 'A4', 'en');
+$pdf = new HTML2PDF('L', 'A4', 'en'); // Set orientation to Landscape
 $pdf->WriteHTML($html);
-$pdfPath = 'output/laporan_keberangkatan.pdf';
-$pdf->Output($pdfPath, 'F'); // Simpan PDF ke file
-
-// Tampilkan tombol unduh
-echo "<div style='text-align: center; margin-top: 20px;'>
-    <a href='$pdfPath' class='btn btn-primary' style='text-decoration: none; padding: 10px 20px; background-color: #007bff; color: #fff; border-radius: 5px;'>Unduh Laporan PDF</a>
-</div>";
+$pdf->Output('laporan_keberangkatan.pdf', 'D');
 ?>

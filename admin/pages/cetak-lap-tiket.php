@@ -34,16 +34,15 @@ p{
 
 
 	?>
-<h3 style="text-align: center; font-size: 16px">LAPORAN DATA TIKET</h3>
+
 <h3 style="text-align: center; font-size: 13px;">PT.ANUGERA SEJAHTERA MAS</h3>
 <p style="text-align: center;">Jl. Alamat lengkap</p>
 <p style="text-align: center;">Alamat-email@gmail.com / Hp:0821233123123 / Pin:b3jk343</p>
 <hr>
+<h3 style="text-align: center; font-size: 16px">LAPORAN DATA TIKET</h3>
 <p style="text-align: center; margin-bottom: 5px;"> Periode : Semua </p>
 <table border="0" width="50%">
 <tr>
-
-
 	<th width='5'>NO</th>
 	<th width='40'>KODE TIKET</th>
 	<th width='20'>JUMLAH DEWASA</th>

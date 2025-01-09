@@ -36,11 +36,11 @@ $bln=$_GET['bln'];
 $thn=$_GET['thn'];
 
 	?>
-<h3 style="text-align: center; font-size: 16px">LAPORAN PEMESANAN TIKET</h3>
 <h3 style="text-align: center; font-size: 13px;">PT.ANUGERA SEJAHTERA MAS</h3>
 <p style="text-align: center;">Jl. Alamat lengkap</p>
 <p style="text-align: center;">Alamat-email@gmail.com / Hp:0821233123123 / Pin:b3jk343</p>
 <hr>
+<h3 style="text-align: center; font-size: 16px">LAPORAN PEMESANAN TIKET</h3>
 <p style="text-align: center; margin-bottom: 5px;"> Periode : <?php if(!$bln=="") echo $nmbulan[(int) $bln - 1]; ?> <?php if(!$thn=="") echo $thn; ?> </p>
 <table border="0" width="50%">
 <tr>

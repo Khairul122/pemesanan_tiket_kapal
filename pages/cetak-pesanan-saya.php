@@ -28,7 +28,7 @@ p{
 <h3 style="text-align: center; font-size: 16px;">BUKTI PEMESANAN TIKET</h3>
 <h3 style="text-align: center; font-size: 13px;">PT.ANUGRAH SEJAHTERA MAS</h3>
 <p style="text-align: center;">Jl.Alamat lengkap perusahaan</p>
-<p style="text-align: center;">Alamat-email@gmail.com / Hp:0821233123123 / Pin:b3jk343</p>
+<p style="text-align: center;">mentawaifast@gmail.comn | +62 751 893489 </p>
 
 <hr>
                      <?php

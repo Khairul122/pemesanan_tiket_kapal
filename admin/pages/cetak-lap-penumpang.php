@@ -46,8 +46,8 @@
     ?>
    
     <h3 style="text-align: center; font-size: 13px;">PT.ANUGERA SEJAHTERA MAS</h3>
-    <p style="text-align: center;">Jl. Alamat lengkap</p>
-    <p style="text-align: center;">Alamat-email@gmail.com / Hp:0821233123123 / Pin:b3jk343</p>
+    <p style="text-align: center;">Jln. Nipah No. 1B, Kelurahan Berok Nipah, Kecamatan Padang Barat, Kota Padang</p>
+    <p style="text-align: center;">mentawaifast@gmail.comn | +62 751 893489 </p>
     <hr>
     <h3 style="text-align: center; font-size: 16px">LAPORAN DATA MEMBER</h3>
     <p style="text-align: center; margin-bottom: 5px;"> Periode : <?php if (!$bln == "") echo $nmbulan[(int) $bln - 1]; ?> <?php if (!$thn == "") echo $thn; ?> </p>

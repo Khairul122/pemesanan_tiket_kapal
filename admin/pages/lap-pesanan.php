@@ -96,7 +96,7 @@ if(isset($_POST['thn'])) {
                                     <th>Kode</th>
                                     <th>Nama penumpang</th>
                                     <th>Nomor kursi</th>
-                                    <th>Tujuan</th>
+                                    <th>Rute (Asal-Tujuan)</th>
                                     <th>Tanggal Berangkat</th>
                                     <th>Telepon</th>
                                     <th>Email</th>
@@ -106,14 +106,14 @@ if(isset($_POST['thn'])) {
                             <tbody>
                                 <?php
                                 include '../../config/koneksi.php';
-                                $sql = mysqli_query($koneksi,"SELECT tujuan.nama_tujuan,kursi.nok,tiket.jam_berangkat,tiket.kode_tiket,pesan.* FROM tiket,tujuan,kursi,pesan WHERE tujuan.kode_tujuan=tiket.id_tujuan and kursi.idk=pesan.idk and pesan.kode_tiket=tiket.kode_tiket and pesan.status=3 $cari0 $cari1 $cari2");
+                                $sql = mysqli_query($koneksi,"SELECT tujuan.nama_tujuan,pelabuhan_asal,kursi.nok,tiket.jam_berangkat,tiket.kode_tiket,pesan.* FROM tiket,tujuan,kursi,pesan WHERE tujuan.kode_tujuan=tiket.id_tujuan and kursi.idk=pesan.idk and pesan.kode_tiket=tiket.kode_tiket and pesan.status=3 $cari0 $cari1 $cari2");
                                 while($q = mysqli_fetch_array($sql)) {
                                 ?>
                                 <tr>
                                     <td><?php echo $q['id_pesan']; ?></td>
                                     <td><?php echo $q['nm_penumpang']; ?></td>
                                     <td><?php echo $q['nok']; ?></td>
-                                    <td><?php echo $q['nama_tujuan']; ?></td>
+                                    <td><?php echo $q['pelabuhan_asal'] . ' - ' . $q['nama_tujuan']; ?></td>
                                     <td><?php echo date('d-m-Y',strtotime($q['tgl_berangkat'])); ?>, Jam <?php echo date('H:i',strtotime($q['jam_berangkat'])); ?></td>
                                     <td><?php echo $q['nohp']; ?></td>
                                     <td><?php echo $q['email']; ?></td>

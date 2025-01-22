@@ -35,6 +35,7 @@ include '../../config/koneksi.php';
                         <th>No</th>
                         <th>Kode Tujuan</th>
                         <th>Nama Tujuan</th>
+                        <th>Pelabuhan Asal</th>
                         <th>Lama Tujuan</th>
                       </tr>
                     </thead>
@@ -51,6 +52,7 @@ include '../../config/koneksi.php';
                         <td><?php echo $no; ?></td>
                         <td><?php echo $q['kode_tujuan']; ?></td>
                         <td><?php echo $q['nama_tujuan']; ?></td>
+                        <td><?php echo $q['pelabuhan_asal']; ?></td>
                         <td><?php echo $q['lama_tujuan']; ?></td>
                         </tr>
                       <?php } ?>

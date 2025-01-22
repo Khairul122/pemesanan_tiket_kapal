@@ -43,8 +43,8 @@
 
     ?>
     <h3 style="text-align: center; font-size: 13px;">PT.ANUGERA SEJAHTERA MAS</h3>
-    <p style="text-align: center;">Jl. Alamat lengkap</p>
-    <p style="text-align: center;">Alamat-email@gmail.com / Hp:0821233123123 / Pin:b3jk343</p>
+    <p style="text-align: center;">Jln. Nipah No. 1B, Kelurahan Berok Nipah, Kecamatan Padang Barat, Kota Padang</p>
+    <p style="text-align: center;">mentawaifast@gmail.comn | +62 751 893489 </p>
     <hr>
     <h3 style="text-align: center; font-size: 16px">LAPORAN DATA TUJUAN</h3>
     <p style="text-align: center; margin-bottom: 5px;"> Periode : Semua </p>
@@ -52,11 +52,10 @@
         <tr>
 
             <th width='40'>NO</th>
-            <th width='160'>KODE TUJUAN</th>
-            <th width='200'>NAMA TUJUAN</th>
-            <th width='200'>LAMA TUJUAN</th>
-
-
+            <th width='100'>KODE TUJUAN</th>
+            <th width='120'>NAMA TUJUAN</th>
+            <th width='150'>PELABUHAN ASAL</th>
+            <th width='150'>LAMA TUJUAN</th>
         </tr>
         <?php
         // Load file koneksi.php
@@ -77,9 +76,10 @@
 
                 echo "<tr>";
                 echo "<td  width='40'>" . $no . "</td>";
-                echo "<td  width='160'>" . $data['kode_tujuan'] . "</td>";
-                echo "<td width='200'>" . $data['nama_tujuan'] . "</td>";
-                echo "<td width='200'>" . $data['lama_tujuan'] . "</td>";
+                echo "<td  width='100'>" . $data['kode_tujuan'] . "</td>";
+                echo "<td width='120'>" . $data['nama_tujuan'] . "</td>";
+                echo "<td width='150'>" . $data['pelabuhan_asal'] . "</td>";
+                echo "<td width='150'>" . $data['lama_tujuan'] . "</td>";
                 echo "</tr>";
             }
         } else { // Jika data tidak ada

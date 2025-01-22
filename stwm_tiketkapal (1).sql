@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2025 at 04:56 PM
+-- Generation Time: Jan 09, 2025 at 08:59 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `user`, `pass`, `nama`, `lev`) VALUES
-('IDA-A001-9348939-34845734575', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Esarlina', 1);
+('IDA-A001-9348939-34845734575', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -76,16 +76,6 @@ CREATE TABLE `berangkat` (
   `tanggal` datetime DEFAULT NULL,
   `status` enum('P','B') DEFAULT 'B'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `berangkat`
---
-
-INSERT INTO `berangkat` (`id_berangkat`, `id_tiket`, `no_surat_izin`, `jml_penumpang`, `tanggal`, `status`) VALUES
-('IB-K008', 'KTKB-T008', 'SK-DISHUB/0990-2017', '78', '2017-02-03 00:00:00', 'P'),
-('IB-K009', 'KTKB-T009', 'SK-DISHUB/0990-2017', '78', '2017-02-03 00:00:00', 'P'),
-('IB-K010', 'KTKB-T010', 'SK-DISHUB/0990-2017', '78', '2017-02-03 00:00:00', 'P'),
-('IB-K011', 'KTKB-T011', 'SK-DISHUB/0990-2017', '78', '2017-03-08 13:00:00', 'P');
 
 -- --------------------------------------------------------
 
@@ -144,13 +134,6 @@ CREATE TABLE `inbox` (
   `isi` text NOT NULL,
   `tgl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `inbox`
---
-
-INSERT INTO `inbox` (`idi`, `nm`, `sub`, `isi`, `tgl`) VALUES
-('PI001', 'Khairul Huda', 'Laporan', 'Halo', '2025-01-08 15:52:58');
 
 -- --------------------------------------------------------
 
@@ -244,20 +227,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`p_no_identitas`, `user`, `pass`, `p_nama`, `email`, `p_nohp`, `p_alamat`, `lev`, `confirm`, `tgl_daf`) VALUES
-('PL0501211', 'padang', '93da7ff0080ed80c4176b99cf2ad459a', 'test', 'test@gmail.com', '08123123123', 'padang', 2, 'C', '2021-01-05 23:15:25'),
-('PL0704191', 'member', 'aa08769cdcb26674c6706093503ff0a3', 'bege', 'nopen.rianto@gmail.com', '08123123123', 'admin', 2, 'Y', '2021-01-05 23:08:35'),
-('PL07062413', 'penumpang1', '06cb2e93e8008c6dbbda2af9b096e9aa', 'Joko purwanto', 'joko@gmail.com', '0811324268', 'Perkantoran Mutiara Center Kav A No 16\r\nKayuringin, Jl. A.Yani, RT.001/RW.005,', 2, 'Y', '2024-06-07 16:06:16'),
-('PL08012514', '12345', '827ccb0eea8a706c4c34a16891f84e7b', 'Khairul Huda', 'khairulhuda@gmail.com', '082165443677', 'Lhoksuemawe\r\nBlang Pulo', 2, 'Y', '2025-01-08 10:22:40'),
-('PL1007174', 'member', 'aa08769cdcb26674c6706093503ff0a3', 'afrizal', 'afrizal_arta@gmail.com', '08343423423', 'asdsadsad', 2, 'Y', '2017-09-24 00:42:02'),
-('PL1306211', 'test123', 'cc03e747a6afbbcbf8be7668acfebee5', 'test123', 'test222@gmail.com', '0821321312321', 'padang', 2, 'Y', '2021-06-13 18:04:41'),
-('PL1306217', 'google123', 'b8f8312b939f00abb38eeafd4fd107f3', 'googel', 'google@gmail.com', '0812312312312', 'padang', 2, 'Y', '2021-06-13 18:13:35'),
-('PL1306218', 'aku123', '871237bf25ba34556a2755fdf2f0ee44', 'aku123', 'aku@gmail.com', '081231231232', 'padang', 2, 'Y', '2021-06-13 18:14:38'),
-('PL1502181', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'asdsad', 'dfsfsdfsdf@gmail.com', '0678565464', 'sadasdasdas', 2, 'C', '2018-02-15 22:17:00'),
-('PL15062110', 'siskasari', 'fd8fbc2f38b2c8d972a40f9c17833af4', 'asjdhkasjdsad', '2asdsa@gas.com', '34234234', 'asdasdasd', 2, 'Y', '2021-06-15 19:28:41'),
-('PL15062111', 'asdfgh', 'a152e841783914146e4bcd4f39100686', 'asdasd', 'asdas@gmail.com', '3242423423', 'asdasdasd', 2, 'Y', '2021-06-15 19:30:26'),
-('PL15062112', 'robin12345', 'fdde92eb6af29f8beb2bc9557410f2c8', 'robin', 'robin123@fsfa.com', 'robin', 'padang', 2, 'Y', '2021-06-15 19:41:25'),
-('PL1506219', 'nori1234', '1af623c489d2c4e8e940a25f8875bb80', 'nori', 'nori@gmail.com', '08123123232', 'padang', 2, 'Y', '2021-06-15 17:45:09'),
-('PL2409171', 'qwerty', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'nopen', 'nopen.pungkonji@gmail.com', '082312321', 'padang', 2, 'Y', '2017-09-24 00:48:53');
+('PL08012514', '12345', '827ccb0eea8a706c4c34a16891f84e7b', 'Khairul Huda', 'khairulhuda@gmail.com', '082165443677', 'Lhoksuemawe\r\nBlang Pulo', 2, 'Y', '2025-01-08 10:22:40');
 
 -- --------------------------------------------------------
 
@@ -306,19 +276,6 @@ CREATE TABLE `pesan` (
   `no_kendaraan` varchar(30) NOT NULL,
   `bukti` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pesan`
---
-
-INSERT INTO `pesan` (`id_pesan`, `kode_member`, `kode_tiket`, `tgl_berangkat`, `ktgr_tiket`, `nm_penumpang`, `umur`, `idk`, `bagasi`, `nohp`, `email`, `tanggal_pesan`, `status`, `id_golongan`, `no_kendaraan`, `bukti`) VALUES
-('PS-T1', 'PL1007174', 'KTKB-T011', '2019-02-23', 'Dewasa', 'yopi', '1985-04-04', 'IK026', 'IBG-001', '08213123123', 'yopi@gmail.com', '2019-02-23 04:33:14', '3', 1, '', ''),
-('PS-T2', 'PL0704191', 'KTKB-T007', '2021-01-06', 'Dewasa', 'wdeqw', '1982-03-02', 'IK001', 'IBG-001', '122', 'asda@gmail.com', '2021-01-04 22:10:42', '2', 1, '', ''),
-('PS-T3', 'PL2409171', 'KTKB-T007', '2021-06-15', 'Dewasa', 'asdsadsa', '1982-02-03', 'IK002', 'IBG-001', '32423432423', 'asdasd@adas.com', '2021-06-15 05:46:25', '2', 1, '', ''),
-('PS-T4', 'PL15062112', 'KTKB-T007', '2021-06-15', 'Dewasa', 'asdasd', '1982-01-02', 'IK003', 'IBG-001', '3242342342', 'asdasd@adas.com', '2021-06-14 20:36:13', '2', 1, '', ''),
-('PS-T5', 'PL07062413', 'KTKB-T011', '2024-06-08', 'Dewasa', 'Joko purwanto', '1982-02-01', 'IK027', 'IBG-001', '0811324268', 'hrd@msolusi.id', '2024-06-07 04:57:04', '2', 3, '', ''),
-('PS-T6', 'PL08012514', 'KTKB-T007', '2025-01-09', 'Dewasa', 'Khairul Huda', '2001-01-02', 'IK004', 'IBG-001', '082165443677', 'khairulhuda242@gmail.com', '2025-01-07 21:26:03', '3', 0, '', 'PL08012514_KTKB-T007_20250108_155222.png'),
-('PS-T7', 'PL08012514', 'KTKB-T007', '2025-01-09', 'Anak', 'Khairul Huda', '2003-02-08', 'IK005', 'IBG-001', '082165443677', 'khairulhuda242@gmail.com', '2025-01-07 21:26:03', '3', 0, '', 'PL08012514_KTKB-T007_20250108_155222.png');
 
 -- --------------------------------------------------------
 

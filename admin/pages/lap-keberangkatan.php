@@ -106,7 +106,7 @@ if (isset($_POST['thn']) && !empty($_POST['thn']) && $_POST['thn'] != '-Tahun-')
                                     <th>Kode Tiket</th>
                                     <th>Tanggal Berangkat</th>
                                     <th>Jam Berangkat</th>
-                                    <th>Tujuan</th>
+                                    <th>Rute(Asal-Tujuan)</th>
                                     <th>Kapal</th>
                                     <th>Nahkoda</th>
                                     <th>Jumlah Penumpang</th>
@@ -118,15 +118,16 @@ if (isset($_POST['thn']) && !empty($_POST['thn']) && $_POST['thn'] != '-Tahun-')
                                 <?php
                                 $no = 0;
                                 $sql = mysqli_query($koneksi, "SELECT tiket.id_nahkoda, tiket.jam_berangkat, 
-                                        tiket.id_kapal, tiket.id_tujuan, nahkoda.nama_nah, tujuan.nama_tujuan, 
-                                        kapal.nama_kapal, berangkat.* 
-                                        FROM tiket 
-                                        JOIN nahkoda ON nahkoda.kode_nah = tiket.id_nahkoda
-                                        JOIN tujuan ON tujuan.kode_tujuan = tiket.id_tujuan 
-                                        JOIN kapal ON kapal.kode_kapal = tiket.id_kapal 
-                                        JOIN berangkat ON tiket.kode_tiket = berangkat.id_tiket 
-                                        WHERE 1=1 $cari1 $cari2 $cari3 
-                                        ORDER BY berangkat.tanggal DESC");
+                                tiket.id_kapal, tiket.id_tujuan, nahkoda.nama_nah, tujuan.nama_tujuan,
+                                tujuan.pelabuhan_asal, kapal.nama_kapal, berangkat.* 
+                                FROM tiket 
+                                JOIN nahkoda ON nahkoda.kode_nah = tiket.id_nahkoda
+                                JOIN tujuan ON tujuan.kode_tujuan = tiket.id_tujuan 
+                                JOIN kapal ON kapal.kode_kapal = tiket.id_kapal 
+                                JOIN berangkat ON tiket.kode_tiket = berangkat.id_tiket 
+                                WHERE 1=1 $cari1 $cari2 $cari3 
+                                ORDER BY berangkat.tanggal DESC");
+
 
                                 while ($q = mysqli_fetch_array($sql)) {
                                     $no++;
@@ -136,7 +137,7 @@ if (isset($_POST['thn']) && !empty($_POST['thn']) && $_POST['thn'] != '-Tahun-')
                                         <td><?php echo $q['id_tiket']; ?></td>
                                         <td><?php echo date('d-m-Y', strtotime($q['tanggal'])); ?></td>
                                         <td><?php echo date('H:i', strtotime($q['jam_berangkat'])); ?></td>
-                                        <td><?php echo $q['id_tujuan'] . ' / ' . $q['nama_tujuan']; ?></td>
+                                        <td><?php echo $q['id_tujuan'] . ' / ' . $q['nama_tujuan'] . ' - ' . $q['pelabuhan_asal']; ?></td>
                                         <td><?php echo $q['id_kapal'] . ' / ' . $q['nama_kapal']; ?></td>
                                         <td><?php echo $q['id_nahkoda'] . ' / ' . $q['nama_nah']; ?></td>
                                         <td><?php echo $q['jml_penumpang']; ?></td>

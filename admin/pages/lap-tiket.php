@@ -49,7 +49,7 @@ $thn=$_POST['thn'];
                         <th>Jumlah Tiket Anak</th>
                         <th>Harga Tiket Dewasa</th>
                         <th>Harga Tiket Anak</th>
-                        <th>Tujuan</th>
+                        <th>Raute (Asal-Tujuan)</th>
                         <th>Kapal</th>
                         <th>Nahkoda</th>
                       </tr>
@@ -59,7 +59,7 @@ $thn=$_POST['thn'];
                      <?php
                     include '../../config/koneksi.php';
                       $no=0;
-                    $sql=mysqli_query($koneksi,"SELECT tujuan.nama_tujuan,kapal.nama_kapal,nahkoda.nama_nah,tiket. * FROM tiket,nahkoda,tujuan,kapal WHERE tujuan.kode_tujuan=tiket.id_tujuan and kapal.kode_kapal=tiket.id_kapal and nahkoda.kode_nah=tiket.id_nahkoda");
+                    $sql=mysqli_query($koneksi,"SELECT tujuan.nama_tujuan,pelabuhan_asal,kapal.nama_kapal,nahkoda.nama_nah,tiket. * FROM tiket,nahkoda,tujuan,kapal WHERE tujuan.kode_tujuan=tiket.id_tujuan and kapal.kode_kapal=tiket.id_kapal and nahkoda.kode_nah=tiket.id_nahkoda");
                       while($q=mysqli_fetch_array($sql)){
                         $no++;
 
@@ -71,7 +71,7 @@ $thn=$_POST['thn'];
                         <td><?php echo $q['jml_tiket_ank2']; ?></td>
                         <td><?php echo $q['hrg_tiket_dewasa']; ?></td>
                         <td><?php echo $q['hrg_tiket_ank2']; ?></td>
-                        <td><?php echo $q['id_tujuan'].'/'.$q['nama_tujuan']; ?></td>
+                        <td><?php echo $q['id_tujuan'] . '/' . $q['nama_tujuan'] . ' - ' . $q['pelabuhan_asal']; ?></td>
                         <td><?php echo $q['id_kapal'].'/'.$q['nama_kapal']; ?></td>
                         <td><?php echo $q['id_nahkoda'].'/'.$q['nama_nah']; ?></td>
                        

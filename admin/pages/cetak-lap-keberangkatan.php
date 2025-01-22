@@ -56,8 +56,8 @@
 	}
 	?>
 	<h3 style="text-align: center; font-size: 13px;">PT.ANUGERA SEJAHTERA MAS</h3>
-	<p style="text-align: center;">Jl. Alamat lengkap</p>
-	<p style="text-align: center;">Alamat-email@gmail.com / Hp:0821233123123 / Pin:b3jk343</p>
+	<p style="text-align: center;">Jln. Nipah No. 1B, Kelurahan Berok Nipah, Kecamatan Padang Barat, Kota Padang</p>
+	<p style="text-align: center;">mentawaifast@gmail.comn | +62 751 893489 </p>
 	<hr>
 	<h3 style="text-align: center; font-size: 16px">LAPORAN KEBERANGKATAN</h3>
 	<p style="text-align: center; margin-bottom: 5px;"> Periode : <?php
@@ -75,7 +75,7 @@
 			<th width='40'>KODE TIKET</th>
 			<th width='40'>TANGGAL</th>
 			<th width='20'>JAM</th>
-			<th width='60'>TUJUAN</th>
+			<th width='60'>RUTE(ASAL-TUJUAN)</th>
 			<th width='60'>KAPAL</th>
 			<th width='60'>NAHKODA</th>
 			<th width='70'>JUMLAH PENUMPANG</th>
@@ -86,7 +86,8 @@
 		// Load file koneksi.php
 		include "../../config/koneksi.php";
 
-		$sql = mysqli_query($koneksi, "SELECT tiket.id_nahkoda, tiket.id_kapal, tiket.id_tujuan, nahkoda.nama_nah, tujuan.nama_tujuan, kapal.nama_kapal, berangkat.* FROM tiket 
+		$sql = mysqli_query($koneksi, "SELECT tiket.id_nahkoda, tiket.id_kapal, tiket.id_tujuan, nahkoda.nama_nah, tujuan.nama_tujuan, tujuan.pelabuhan_asal, kapal.nama_kapal, berangkat.* 
+    FROM tiket 
     JOIN nahkoda ON nahkoda.kode_nah = tiket.id_nahkoda
     JOIN tujuan ON tujuan.kode_tujuan = tiket.id_tujuan
     JOIN kapal ON kapal.kode_kapal = tiket.id_kapal

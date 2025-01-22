@@ -260,7 +260,7 @@
                                  <p><strong>Address</strong>: Padang</p>
                              </li>
                              <li><i class="fa fa-user"></i>
-                                 <p><strong>Phone</strong>:(+91) 9000-12345</p>
+                                 <p><strong>Phone</strong>:(+91) 8800-12345</p>
                              </li>
                              <li><i class="fa fa-envelope"></i>
                                  <p><strong>Email</strong>: <a href="#">mail@example.com</a></p>

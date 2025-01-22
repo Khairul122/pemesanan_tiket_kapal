@@ -36,8 +36,8 @@ p{
 	?>
 
 <h3 style="text-align: center; font-size: 13px;">PT.ANUGERA SEJAHTERA MAS</h3>
-<p style="text-align: center;">Jl. Alamat lengkap</p>
-<p style="text-align: center;">Alamat-email@gmail.com / Hp:0821233123123 / Pin:b3jk343</p>
+<p style="text-align: center;">Jln. Nipah No. 1B, Kelurahan Berok Nipah, Kecamatan Padang Barat, Kota Padang</p>
+<p style="text-align: center;">mentawaifast@gmail.comn | +62 751 893489 </p>
 <hr>
 <h3 style="text-align: center; font-size: 16px">LAPORAN DATA TIKET</h3>
 <p style="text-align: center; margin-bottom: 5px;"> Periode : Semua </p>
@@ -49,7 +49,7 @@ p{
 	<th width='50'>HARGA DEWASA</th>
 	<th width='20'>JUMLAH ANAK2</th>
 	<th width='50'>HARGA ANAK2</th>
-	<th width='80'>TUJUAN</th>
+	<th width='80'>RUTE(ASAL-TUJUAN)</th>
 	<th width='80'>NAHKODA</th>
 	<th width='80'>KAPAL</th>
 
@@ -59,7 +59,7 @@ p{
 include "../../config/koneksi.php";
 
 
-$sql = mysqli_query($koneksi,"SELECT tujuan.nama_tujuan,kapal.nama_kapal,nahkoda.nama_nah,tiket. * FROM tiket,nahkoda,tujuan,kapal WHERE tujuan.kode_tujuan=tiket.id_tujuan and kapal.kode_kapal=tiket.id_kapal and nahkoda.kode_nah=tiket.id_nahkoda"); // Eksekusi/Jalankan query dari variabel $query
+$sql = mysqli_query($koneksi,"SELECT tujuan.nama_tujuan,pelabuhan_asal,kapal.nama_kapal,nahkoda.nama_nah,tiket. * FROM tiket,nahkoda,tujuan,kapal WHERE tujuan.kode_tujuan=tiket.id_tujuan and kapal.kode_kapal=tiket.id_kapal and nahkoda.kode_nah=tiket.id_nahkoda"); // Eksekusi/Jalankan query dari variabel $query
 $row = mysqli_num_rows($sql); // Ambil jumlah data dari hasil eksekusi $sql
  
 if($row > 0){ // Jika jumlah data lebih dari 0 (Berarti jika data ada)
@@ -78,7 +78,7 @@ if($row > 0){ // Jika jumlah data lebih dari 0 (Berarti jika data ada)
          echo "<td width='40'>".$data['hrg_tiket_dewasa']."</td>";
         echo "<td  width='20'>".$data['jml_tiket_ank2']."</td>";
          echo "<td  width='40'>".$data['hrg_tiket_ank2']."</td>";
-          echo "<td  width='80'>".$data['id_tujuan'].'/'.$data['nama_tujuan']."</td>";
+          echo "<td  width='80'>".$data['id_tujuan'].'/'.$data['pelabuhan_asal'].'-'.$data['nama_tujuan']."</td>";
         echo "<td  width='80'>".$data['id_nahkoda'].'/'.$data['nama_nah']."</td>";
         echo "<td  width='80'>".$data['id_kapal'].'/'.$data['nama_kapal']."</td>";
         echo "</tr>";

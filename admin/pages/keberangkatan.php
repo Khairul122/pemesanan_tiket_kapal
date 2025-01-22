@@ -31,7 +31,7 @@
                         <th>Kode Tiket</th>
                         <th>Tanggal Berangkat</th>
                         <th>Jam Berangkat</th>
-                        <th>Tujuan</th>
+                        <th>Rute (Asal-Tujuan)</th>
                         <th>Kapal</th>
                         <th>Nahkoda</th>
                         <th>Jumlah member</th>
@@ -44,7 +44,7 @@
                      <?php
                     include '../../config/koneksi.php';
                       $no=0;
-                    $sql=mysqli_query($koneksi,"SELECT tiket.id_nahkoda,tiket.id_kapal,tiket.id_tujuan,nahkoda.nama_nah,tujuan.nama_tujuan,kapal.nama_kapal,berangkat. * FROM tiket,nahkoda,tujuan,kapal,berangkat WHERE tujuan.kode_tujuan=tiket.id_tujuan and kapal.kode_kapal=tiket.id_kapal and nahkoda.kode_nah=tiket.id_nahkoda and tiket.kode_tiket=berangkat.id_tiket");
+                    $sql=mysqli_query($koneksi,"SELECT tiket.id_nahkoda,tiket.id_kapal,tiket.id_tujuan,nahkoda.nama_nah,tujuan.nama_tujuan,pelabuhan_asal,kapal.nama_kapal,berangkat. * FROM tiket,nahkoda,tujuan,kapal,berangkat WHERE tujuan.kode_tujuan=tiket.id_tujuan and kapal.kode_kapal=tiket.id_kapal and nahkoda.kode_nah=tiket.id_nahkoda and tiket.kode_tiket=berangkat.id_tiket");
                       while($q=mysqli_fetch_array($sql)){
                         $no++;
 
@@ -54,7 +54,7 @@
                         <td><?php echo $q['id_tiket']; ?></td>
                         <td><?php echo date('d-m-Y',strtotime($q['tanggal'])); ?></td>
                         <td><?php echo date('H:i',strtotime($q['tanggal'])); ?></td>
-                        <td><?php echo $q['id_tujuan'].' / '.$q['nama_tujuan']; ?></td>
+                        <td><?php echo $q['id_tujuan'] . ' / ' . $q['nama_tujuan'] . ' - ' . $q['pelabuhan_asal']; ?></td>
                         <td><?php echo $q['id_kapal'].' / '.$q['nama_kapal']; ?></td>
                         <td><?php echo $q['id_nahkoda'].' / '.$q['nama_nah']; ?></td>
                         <td><?php echo $q['jml_penumpang']; ?></td>

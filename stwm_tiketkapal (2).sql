@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2025 at 08:59 AM
+-- Generation Time: Jan 23, 2025 at 11:44 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `id` varchar(100) NOT NULL,
+  `id` int(11) NOT NULL,
   `user` varchar(255) NOT NULL,
   `pass` varchar(255) DEFAULT NULL,
   `nama` varchar(100) DEFAULT NULL,
@@ -39,7 +39,10 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `user`, `pass`, `nama`, `lev`) VALUES
-('IDA-A001-9348939-34845734575', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 1);
+(1, 'penjualan', '21232f297a57a5a743894a0e4a801fc3', 'penjualan', 1),
+(2, 'pimpinan', '21232f297a57a5a743894a0e4a801fc3', 'pimpinan', 2),
+(3, 'syahbandar', '21232f297a57a5a743894a0e4a801fc3', 'syahbandar', 3),
+(4, 'operator', '21232f297a57a5a743894a0e4a801fc3', 'Operator Agen', 4);
 
 -- --------------------------------------------------------
 
@@ -77,6 +80,13 @@ CREATE TABLE `berangkat` (
   `status` enum('P','B') DEFAULT 'B'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `berangkat`
+--
+
+INSERT INTO `berangkat` (`id_berangkat`, `id_tiket`, `no_surat_izin`, `jml_penumpang`, `tanggal`, `status`) VALUES
+('IB-K001', 'KTKB-T007', '01', '10', '2025-01-10 00:00:00', 'P');
+
 -- --------------------------------------------------------
 
 --
@@ -96,7 +106,8 @@ CREATE TABLE `confirm_pembayaran` (
 --
 
 INSERT INTO `confirm_pembayaran` (`id_konfirm`, `id_member`, `total_bayar`, `tgl_confirm`, `tgl_jt_tempo`) VALUES
-(3, 'PL07062413 ', '300444', '2024-06-06 22:03:33', '2024-06-07 08:03:33');
+(3, 'PL07062413 ', '300444', '2024-06-06 22:03:33', '2024-06-07 08:03:33'),
+(4, 'PL08012514 ', '500356', '2025-01-22 04:30:19', '2025-01-22 02:30:19');
 
 -- --------------------------------------------------------
 
@@ -277,6 +288,16 @@ CREATE TABLE `pesan` (
   `bukti` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pesan`
+--
+
+INSERT INTO `pesan` (`id_pesan`, `kode_member`, `kode_tiket`, `tgl_berangkat`, `ktgr_tiket`, `nm_penumpang`, `umur`, `idk`, `bagasi`, `nohp`, `email`, `tanggal_pesan`, `status`, `id_golongan`, `no_kendaraan`, `bukti`) VALUES
+('PS-T1', 'PL08012514', 'KTKB-T007', '2025-01-10', 'Dewasa', 'Budi1', '2017-03-02', 'IK001', 'IBG-001', '082165443677', 'khairulhuda242@gmail.com', '2025-01-09 04:24:27', '2', 0, '', ''),
+('PS-T2', 'PL08012514', 'KTKB-T007', '2025-01-10', 'Dewasa', ' Budi 2', '1996-03-14', 'IK002', 'IBG-001', '082165443677', 'khairulhuda242@gmail.com', '2025-01-09 04:24:27', '2', 0, '', ''),
+('PS-T3', 'PL08012514', 'KTKB-T007', '2025-01-13', 'Dewasa', 'Khairul Huda', '1983-01-01', 'IK003', 'IBG-001', '082165443677', 'khairulhuda242@gmail.com', '2025-01-11 22:32:09', '2', 1, '', ''),
+('PS-T4', 'PL08012514', 'KTKB-T007', '2025-01-23', 'Dewasa', 'Budi', '1991-01-02', 'IK004', 'IBG-001', '082165443677', 'khairulhuda242@gmail.com', '2025-01-21 22:06:10', '2', 1, 'BA 1010 ABC', '');
+
 -- --------------------------------------------------------
 
 --
@@ -317,17 +338,17 @@ INSERT INTO `tiket` (`kode_tiket`, `jml_tiket_dewasa`, `jml_tiket_ank2`, `id_tuj
 CREATE TABLE `tujuan` (
   `kode_tujuan` varchar(15) NOT NULL,
   `nama_tujuan` varchar(100) DEFAULT NULL,
-  `lama_tujuan` varchar(100) DEFAULT NULL
+  `lama_tujuan` varchar(100) DEFAULT NULL,
+  `pelabuhan_asal` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tujuan`
 --
 
-INSERT INTO `tujuan` (`kode_tujuan`, `nama_tujuan`, `lama_tujuan`) VALUES
-('IT-B002', 'Mentawai Siberut Sikabaluan', '4 jam'),
-('IT-B003', 'Mentawai Tuapeijat', '5 jam'),
-('IT-B004', 'Mentawai Siberut selatan', '4 jam');
+INSERT INTO `tujuan` (`kode_tujuan`, `nama_tujuan`, `lama_tujuan`, `pelabuhan_asal`) VALUES
+('IT-B002', 'Mentawai Siberut Sikabaluan', '4 jam', 'Tes'),
+('IT-B003', 'Mentawai Tuapeijat', '5 jam', 'tes');
 
 --
 -- Indexes for dumped tables
@@ -416,10 +437,15 @@ ALTER TABLE `tujuan`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT for table `confirm_pembayaran`
 --
 ALTER TABLE `confirm_pembayaran`
-  MODIFY `id_konfirm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_konfirm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `golongan_kendaraan`
 --

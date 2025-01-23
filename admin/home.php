@@ -130,7 +130,8 @@ if (empty($_SESSION['ad'])) {
         </form>
         <ul class="sidebar-menu">
           <li class="header">Menu</li>
-          <?php if ($_SESSION['ad'] == 1): // Menu untuk Admin 
+          <!-- Penjualan -->
+          <?php if ($_SESSION['ad'] == 1):
           ?>
             <li class="treeview">
               <a href="home.php?p=beranda">
@@ -157,6 +158,7 @@ if (empty($_SESSION['ad'])) {
 
           <?php endif; ?>
 
+          <!-- Pimpinan -->
           <?php if ($_SESSION['ad'] == 2): ?>
             <li class="treeview">
             <li class="treeview">
@@ -182,7 +184,7 @@ if (empty($_SESSION['ad'])) {
             </li>
           <?php endif; ?>
 
-
+          <!-- Syahbandar -->
           <?php if ($_SESSION['ad'] == 3): ?>
             <li class="treeview">
             <li class="treeview">
@@ -193,6 +195,16 @@ if (empty($_SESSION['ad'])) {
             <li class="treeview">
               <a href="home.php?p=keberangkatan">
                 <i class="fa fa-anchor"></i> <span>Keberangkatan</span>
+              </a>
+            </li>
+          <?php endif; ?>
+
+          <!-- Operator Agen -->
+          <?php if ($_SESSION['ad'] == 4): ?>
+            <li class="treeview">
+            <li class="treeview">
+              <a href="home.php?p=beranda">
+                <i class="glyphicon glyphicon-th-large"></i> <span>Beranda</span>
               </a>
             </li>
             <li class="treeview">

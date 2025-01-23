@@ -35,6 +35,11 @@ if (mysqli_num_rows($login_admin) > 0) {
         echo "<script>alert('Selamat datang, Pimpinan!');</script>";
         header("location:../admin/home.php");
         exit();
+    }elseif ($level == 4) {
+        $_SESSION['ad'] = $r['id'];
+        echo "<script>alert('Selamat datang, Operator!');</script>";
+        header("location:../admin/home.php");
+        exit();
     }
 } elseif (mysqli_num_rows($login_member) > 0) {
     // Jika ditemukan di tabel member

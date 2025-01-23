@@ -30,7 +30,6 @@
                   <th>Nama Tujuan</th>
                   <th>Lama Tujuan</th>
                   <th>Pelabuhan Asal</th>
-                  <th>Pelabuhan Asal</th>
                   <th>Lama Tujuan</th>
                   <th>Aksi</th>
                 </tr>
@@ -51,6 +50,7 @@
                     <td><?php echo $q['nama_tujuan']; ?></td>
                     <td><?php echo $q['lama_tujuan']; ?></td>
                     <td><?php echo $q['pelabuhan_asal']; ?></td>
+                    <td><?php echo $q['lama_tujuan']; ?></td>
                     <td>
                       <p><a href="home.php?p=edit-tujuan&id=<?php echo $q['kode_tujuan']; ?>" class="btn btn-warning" data-placement="bottom" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil"></i></a>
                         <a href="./pages/delete-tujuan.php?id=<?php echo $q['kode_tujuan']; ?>" class="btn btn-danger" data-placement="bottom" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></a>

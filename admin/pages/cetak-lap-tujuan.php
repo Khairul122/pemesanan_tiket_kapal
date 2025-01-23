@@ -56,6 +56,9 @@
             <th width='120'>NAMA TUJUAN</th>
             <th width='150'>PELABUHAN ASAL</th>
             <th width='150'>LAMA TUJUAN</th>
+            <th width='160'>KODE TUJUAN</th>
+            <th width='200'>NAMA TUJUAN</th>
+            <th width='200'>LAMA TUJUAN</th>
         </tr>
         <?php
         // Load file koneksi.php

@@ -30,6 +30,8 @@
                   <th>Nama Tujuan</th>
                   <th>Lama Tujuan</th>
                   <th>Pelabuhan Asal</th>
+                  <th>Pelabuhan Asal</th>
+                  <th>Lama Tujuan</th>
                   <th>Aksi</th>
                 </tr>
               </thead>

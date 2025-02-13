@@ -40,21 +40,33 @@
                 include '../../config/koneksi.php';
 
                 $sql = mysqli_query($koneksi, "SELECT member.p_nama, member.p_no_identitas, pesan.*, pesan.bukti FROM member, tiket, pesan WHERE member.p_no_identitas=pesan.kode_member AND tiket.kode_tiket=pesan.kode_tiket AND pesan.status=2 GROUP BY member.p_no_identitas");
-
                 while ($q = mysqli_fetch_array($sql)) {
                   $idm = $q['kode_member'];
-                  $sql2 = mysqli_query($koneksi, "SELECT confirm_pembayaran.total_bayar, member.p_nama, member.p_no_identitas, pesan.*, pesan.bukti FROM member, pesan, confirm_pembayaran WHERE member.p_no_identitas=pesan.kode_member AND pesan.kode_member='$idm' AND pesan.kode_member=confirm_pembayaran.id_member AND pesan.status=2");
-                  $jmlt = mysqli_num_rows($sql2);
-                  $q2 = mysqli_fetch_array($sql2);
-                  $hasil = $q2['total_bayar'];
 
-                  // Mendapatkan URL gambar
+                  $sql2 = mysqli_query($koneksi, "SELECT 
+                  COALESCE(SUM(confirm_pembayaran.total_bayar), 0) AS total_bayar, 
+                  COUNT(pesan.kode_tiket) AS jumlah_tiket,
+                  SUM(tiket.hrg_tiket_dewasa) AS total_harga_tiket
+              FROM pesan 
+              JOIN tiket ON pesan.kode_tiket = tiket.kode_tiket
+              LEFT JOIN confirm_pembayaran 
+              ON pesan.kode_member = confirm_pembayaran.id_member 
+              WHERE pesan.kode_member = '$idm' 
+              AND pesan.status = 2 
+              GROUP BY pesan.kode_member");
+                  $q2 = mysqli_fetch_array($sql2);
+                  $jumlah_pesan = isset($q2['jumlah_tiket']) ? $q2['jumlah_tiket'] : 0;
+                  $total_bayar = isset($q2['total_bayar']) ? $q2['total_bayar'] : 0;
+                  $total_harga_tiket = isset($q2['total_harga_tiket']) ? $q2['total_harga_tiket'] : 0;
+
+                  $hasil = ($total_bayar > 0) ? $total_bayar : $total_harga_tiket;
+
                   $buktiUrl = !empty($q['bukti']) ? "../upload/bukti/" . $q['bukti'] : "upload/default.png";
                 ?>
                   <tr>
                     <td><?php echo $q['p_no_identitas']; ?></td>
                     <td><?php echo $q['p_nama']; ?></td>
-                    <td><?php echo $jmlt; ?> Tiket</td>
+                    <td><?php echo $jumlah_pesan; ?> Tiket</td>
                     <td><b>Rp <?php echo number_format($hasil, 0, ".", "."); ?></b></td>
                     <td><?php echo $q['nohp']; ?></td>
                     <td><?php echo $q['email']; ?></td>
@@ -66,6 +78,7 @@
                     </td>
                   </tr>
                 <?php } ?>
+
               </tbody>
             </table>
 

@@ -20,7 +20,7 @@
                 <div class="box-header">
                   <h3 class="box-title">Kapal</h3>
                   <a href="home.php?p=tambah-kapal" class="btn btn-primary"><i class="fa fa-plus"></i>Tambah</a>  
-                </div><!-- /.box-header -->
+                </div>
                 <div class="box-body">
                     
                   <table id="example1" class="table table-bordered table-striped">

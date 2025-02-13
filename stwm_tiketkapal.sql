@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Feb 2025 pada 07.19
--- Versi server: 10.1.38-MariaDB
--- Versi PHP: 5.6.40
+-- Generation Time: Feb 13, 2025 at 07:49 PM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -25,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -37,7 +35,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `user`, `pass`, `nama`, `lev`) VALUES
@@ -49,7 +47,7 @@ INSERT INTO `admin` (`id`, `user`, `pass`, `nama`, `lev`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bagasi`
+-- Table structure for table `bagasi`
 --
 
 CREATE TABLE `bagasi` (
@@ -59,7 +57,7 @@ CREATE TABLE `bagasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `bagasi`
+-- Dumping data for table `bagasi`
 --
 
 INSERT INTO `bagasi` (`id_bagasi`, `jml_bagasi`, `harga`) VALUES
@@ -70,7 +68,7 @@ INSERT INTO `bagasi` (`id_bagasi`, `jml_bagasi`, `harga`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `berangkat`
+-- Table structure for table `berangkat`
 --
 
 CREATE TABLE `berangkat` (
@@ -83,7 +81,7 @@ CREATE TABLE `berangkat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `berangkat`
+-- Dumping data for table `berangkat`
 --
 
 INSERT INTO `berangkat` (`id_berangkat`, `id_tiket`, `no_surat_izin`, `jml_penumpang`, `tanggal`, `status`) VALUES
@@ -97,7 +95,7 @@ INSERT INTO `berangkat` (`id_berangkat`, `id_tiket`, `no_surat_izin`, `jml_penum
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `confirm_pembayaran`
+-- Table structure for table `confirm_pembayaran`
 --
 
 CREATE TABLE `confirm_pembayaran` (
@@ -108,18 +106,10 @@ CREATE TABLE `confirm_pembayaran` (
   `tgl_jt_tempo` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `confirm_pembayaran`
---
-
-INSERT INTO `confirm_pembayaran` (`id_konfirm`, `id_member`, `total_bayar`, `tgl_confirm`, `tgl_jt_tempo`) VALUES
-(3, 'PL07062413 ', '300444', '2024-06-06 22:03:33', '2024-06-07 08:03:33'),
-(4, 'PL08012514 ', '500356', '2025-01-22 04:30:19', '2025-01-22 02:30:19');
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `golongan_kendaraan`
+-- Table structure for table `golongan_kendaraan`
 --
 
 CREATE TABLE `golongan_kendaraan` (
@@ -130,7 +120,7 @@ CREATE TABLE `golongan_kendaraan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `golongan_kendaraan`
+-- Dumping data for table `golongan_kendaraan`
 --
 
 INSERT INTO `golongan_kendaraan` (`id_golongan`, `nm_golongan`, `ket_golongan`, `tarif_golongan`) VALUES
@@ -142,7 +132,7 @@ INSERT INTO `golongan_kendaraan` (`id_golongan`, `nm_golongan`, `ket_golongan`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `inbox`
+-- Table structure for table `inbox`
 --
 
 CREATE TABLE `inbox` (
@@ -153,10 +143,18 @@ CREATE TABLE `inbox` (
   `tgl` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `inbox`
+--
+
+INSERT INTO `inbox` (`idi`, `nm`, `sub`, `isi`, `tgl`) VALUES
+('PI001', 'olivia', 'Hai', 'Budi', '2025-02-13 18:23:04'),
+('PI002', 'Halo', 'Halo', 'Halo', '2025-02-13 18:49:01');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kapal`
+-- Table structure for table `kapal`
 --
 
 CREATE TABLE `kapal` (
@@ -169,7 +167,7 @@ CREATE TABLE `kapal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `kapal`
+-- Dumping data for table `kapal`
 --
 
 INSERT INTO `kapal` (`kode_kapal`, `nama_kapal`, `rakit_kapal`, `izin_kapal`, `jml_kursi`, `ft_kapal`) VALUES
@@ -179,7 +177,7 @@ INSERT INTO `kapal` (`kode_kapal`, `nama_kapal`, `rakit_kapal`, `izin_kapal`, `j
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kursi`
+-- Table structure for table `kursi`
 --
 
 CREATE TABLE `kursi` (
@@ -189,7 +187,7 @@ CREATE TABLE `kursi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `kursi`
+-- Dumping data for table `kursi`
 --
 
 INSERT INTO `kursi` (`idk`, `nok`, `id_kapal`) VALUES
@@ -224,7 +222,7 @@ INSERT INTO `kursi` (`idk`, `nok`, `id_kapal`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `member`
+-- Table structure for table `member`
 --
 
 CREATE TABLE `member` (
@@ -241,10 +239,11 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `member`
+-- Dumping data for table `member`
 --
 
 INSERT INTO `member` (`p_no_identitas`, `user`, `pass`, `p_nama`, `email`, `p_nohp`, `p_alamat`, `lev`, `confirm`, `tgl_daf`) VALUES
+('PL1302256', 'budi', '00dfc53ee86af02e742515cdcf075ed3', 'Budi', 'budi@gmail.com', '082165443677', 'Lhoksuemawe\r\nBlang Pulo', 2, 'Y', '2025-02-13 18:14:37'),
 ('PL3001251', 'wafi', 'a9629197076b8faaf28897469621e21a', 'wafi', 'wafi123@gmail.com', '09242456373', 'Padang', 2, 'Y', '2025-01-30 09:44:23'),
 ('PL3001252', 'imam', 'eaccb8ea6090a40a98aa28c071810371', 'Imam Fakri', 'imam12@gmail.com', '081122334455', 'Sicincin', 2, 'Y', '2025-01-30 17:48:32'),
 ('PL3001253', 'aisyah', '26bb533df5747c7a3f2a9cc48a8cf3ee', 'Aisyah Alfurqan', 'aisyah00@gmail.com', '0812443286728', 'Padang', 2, 'Y', '2025-01-30 17:51:56'),
@@ -254,7 +253,7 @@ INSERT INTO `member` (`p_no_identitas`, `user`, `pass`, `p_nama`, `email`, `p_no
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `nahkoda`
+-- Table structure for table `nahkoda`
 --
 
 CREATE TABLE `nahkoda` (
@@ -266,7 +265,7 @@ CREATE TABLE `nahkoda` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `nahkoda`
+-- Dumping data for table `nahkoda`
 --
 
 INSERT INTO `nahkoda` (`kode_nah`, `nama_nah`, `nohp`, `alm`, `umur`) VALUES
@@ -279,7 +278,7 @@ INSERT INTO `nahkoda` (`kode_nah`, `nama_nah`, `nohp`, `alm`, `umur`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pesan`
+-- Table structure for table `pesan`
 --
 
 CREATE TABLE `pesan` (
@@ -301,26 +300,10 @@ CREATE TABLE `pesan` (
   `bukti` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `pesan`
---
-
-INSERT INTO `pesan` (`id_pesan`, `kode_member`, `kode_tiket`, `tgl_berangkat`, `ktgr_tiket`, `nm_penumpang`, `umur`, `idk`, `bagasi`, `nohp`, `email`, `tanggal_pesan`, `status`, `id_golongan`, `no_kendaraan`, `bukti`) VALUES
-('PS-T1', 'PL08012514', 'KTKB-T007', '2025-01-10', 'Dewasa', 'Budi1', '2017-03-02', 'IK001', 'IBG-001', '082165443677', 'khairulhuda242@gmail.com', '2025-01-09 04:24:27', '2', 0, '', ''),
-('PS-T10', 'PL3001255', 'KTKB-T013', '2025-02-03', 'Dewasa', 'Alexander', '1993-09-04', 'IK006', 'IBG-001', '08236557644', 'alex00@gmail.com', '2025-01-30 05:55:33', '3', 1, '-', 'KTKB-T013_20250130_130525.jpg'),
-('PS-T2', 'PL08012514', 'KTKB-T007', '2025-01-10', 'Dewasa', ' Budi 2', '1996-03-14', 'IK002', 'IBG-001', '082165443677', 'khairulhuda242@gmail.com', '2025-01-09 04:24:27', '2', 0, '', ''),
-('PS-T3', 'PL08012514', 'KTKB-T007', '2025-01-13', 'Dewasa', 'Khairul Huda', '1983-01-01', 'IK003', 'IBG-001', '082165443677', 'khairulhuda242@gmail.com', '2025-01-11 22:32:09', '2', 1, '', ''),
-('PS-T4', 'PL08012514', 'KTKB-T007', '2025-01-23', 'Dewasa', 'Budi', '1991-01-02', 'IK004', 'IBG-001', '082165443677', 'khairulhuda242@gmail.com', '2025-01-21 22:06:10', '2', 1, 'BA 1010 ABC', ''),
-('PS-T5', 'PL3001251', 'KTKB-T013', '2025-01-31', 'Dewasa', 'wafi laili', '2003-03-18', 'IK005', 'IBG-001', '098394787875', 'wafi123@gmail.com', '2025-01-29 20:46:20', '3', 1, '-', 'KTKB-T013_20250130_130525.jpg'),
-('PS-T6', 'PL3001252', 'KTKB-T019', '2025-02-01', 'Dewasa', 'Imam Fakri', '1998-10-03', 'IK026', 'IBG-001', '081234567890', 'imam12@gmail.com', '2025-01-30 05:49:04', '3', 1, '-', 'KTKB-T019_20250130_130453.jpg'),
-('PS-T7', 'PL3001253', 'KTKB-T018', '2025-02-02', 'Dewasa', 'Aisyah', '2002-01-05', 'IK027', 'IBG-001', '081123489728', 'aisyah@gmail.com', '2025-01-30 05:51:36', '3', 0, '', 'KTKB-T018_20250130_130340.jpg'),
-('PS-T8', 'PL3001253', 'KTKB-T018', '2025-02-02', 'Anak', 'Alfurqan', '2020-02-07', 'IK028', 'IBG-001', '081123489728', 'aisyah@gmail.com', '2025-01-30 05:51:36', '3', 0, '', 'KTKB-T018_20250130_130340.jpg'),
-('PS-T9', 'PL3001254', 'KTKB-T019', '2025-02-01', 'Anak', 'Khaila Syahira', '2004-04-18', 'IK029', 'IBG-001', '08244526878', 'khaila@gmail.com', '2025-01-30 05:53:55', '3', 1, '-', 'KTKB-T019_20250130_130453.jpg');
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tiket`
+-- Table structure for table `tiket`
 --
 
 CREATE TABLE `tiket` (
@@ -337,7 +320,7 @@ CREATE TABLE `tiket` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tiket`
+-- Dumping data for table `tiket`
 --
 
 INSERT INTO `tiket` (`kode_tiket`, `jml_tiket_dewasa`, `jml_tiket_ank2`, `id_tujuan`, `id_kapal`, `id_nahkoda`, `hrg_tiket_ank2`, `hrg_tiket_dewasa`, `jam_berangkat`, `jam_tiba`) VALUES
@@ -350,7 +333,7 @@ INSERT INTO `tiket` (`kode_tiket`, `jml_tiket_dewasa`, `jml_tiket_ank2`, `id_tuj
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tujuan`
+-- Table structure for table `tujuan`
 --
 
 CREATE TABLE `tujuan` (
@@ -361,7 +344,7 @@ CREATE TABLE `tujuan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tujuan`
+-- Dumping data for table `tujuan`
 --
 
 INSERT INTO `tujuan` (`kode_tujuan`, `nama_tujuan`, `lama_tujuan`, `pelabuhan_asal`) VALUES
@@ -377,106 +360,102 @@ INSERT INTO `tujuan` (`kode_tujuan`, `nama_tujuan`, `lama_tujuan`, `pelabuhan_as
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `bagasi`
+-- Indexes for table `bagasi`
 --
 ALTER TABLE `bagasi`
   ADD PRIMARY KEY (`id_bagasi`);
 
 --
--- Indeks untuk tabel `berangkat`
+-- Indexes for table `berangkat`
 --
 ALTER TABLE `berangkat`
   ADD PRIMARY KEY (`id_berangkat`);
 
 --
--- Indeks untuk tabel `confirm_pembayaran`
+-- Indexes for table `confirm_pembayaran`
 --
 ALTER TABLE `confirm_pembayaran`
   ADD PRIMARY KEY (`id_konfirm`);
 
 --
--- Indeks untuk tabel `golongan_kendaraan`
+-- Indexes for table `golongan_kendaraan`
 --
 ALTER TABLE `golongan_kendaraan`
   ADD PRIMARY KEY (`id_golongan`);
 
 --
--- Indeks untuk tabel `inbox`
+-- Indexes for table `inbox`
 --
 ALTER TABLE `inbox`
   ADD PRIMARY KEY (`idi`);
 
 --
--- Indeks untuk tabel `kapal`
+-- Indexes for table `kapal`
 --
 ALTER TABLE `kapal`
   ADD PRIMARY KEY (`kode_kapal`);
 
 --
--- Indeks untuk tabel `kursi`
+-- Indexes for table `kursi`
 --
 ALTER TABLE `kursi`
   ADD PRIMARY KEY (`idk`);
 
 --
--- Indeks untuk tabel `member`
+-- Indexes for table `member`
 --
 ALTER TABLE `member`
   ADD PRIMARY KEY (`p_no_identitas`);
 
 --
--- Indeks untuk tabel `nahkoda`
+-- Indexes for table `nahkoda`
 --
 ALTER TABLE `nahkoda`
   ADD PRIMARY KEY (`kode_nah`);
 
 --
--- Indeks untuk tabel `pesan`
+-- Indexes for table `pesan`
 --
 ALTER TABLE `pesan`
   ADD PRIMARY KEY (`id_pesan`);
 
 --
--- Indeks untuk tabel `tiket`
+-- Indexes for table `tiket`
 --
 ALTER TABLE `tiket`
   ADD PRIMARY KEY (`kode_tiket`);
 
 --
--- Indeks untuk tabel `tujuan`
+-- Indexes for table `tujuan`
 --
 ALTER TABLE `tujuan`
   ADD PRIMARY KEY (`kode_tujuan`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
--- AUTO_INCREMENT untuk tabel `confirm_pembayaran`
+-- AUTO_INCREMENT for table `confirm_pembayaran`
 --
 ALTER TABLE `confirm_pembayaran`
   MODIFY `id_konfirm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
--- AUTO_INCREMENT untuk tabel `golongan_kendaraan`
+-- AUTO_INCREMENT for table `golongan_kendaraan`
 --
 ALTER TABLE `golongan_kendaraan`
   MODIFY `id_golongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
